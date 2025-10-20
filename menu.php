@@ -1,4 +1,6 @@
-<?php /* menu.php - no PHP logic required; empty tag to ensure correct PHP file handling */ ?>
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +33,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* --- NAVBAR --- */
     .navbar {
       position: absolute;
       top: 20px;
@@ -59,93 +60,89 @@
     }
 
     .nav-links {
-    display: flex;
-    gap: 25px;
+      display: flex;
+      gap: 25px;
     }
 
     .nav-links a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 600;
-    font-size: 1em;
-    padding: 10px 18px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(8px);
-    transition: 0.3s;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1em;
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      transition: 0.3s;
     }
 
     .nav-links a:hover {
-    background: linear-gradient(90deg, #00ffff, #007bff);
-    color: #000;
-    box-shadow: 0 0 25px rgba(0,255,255,0.7);
-    transform: translateY(-3px);
+      background: linear-gradient(90deg, #00ffff, #007bff);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0,255,255,0.7);
+      transform: translateY(-3px);
     }
 
-    /* --- HEADINGS --- */
     h1 {
-    font-size: 3em;
-    font-weight: 800;
-    text-align: center;
-    letter-spacing: 2px;
-    color: #00e0ff;
-    margin-bottom: 10px;
-    text-shadow: 0 0 25px #00e0ff;
-    margin-top: 120px;
+      font-size: 3em;
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: 2px;
+      color: #00e0ff;
+      margin-bottom: 10px;
+      text-shadow: 0 0 25px #00e0ff;
+      margin-top: 120px;
     }
 
     h2 {
-    text-align: center;
-    font-weight: 500;
-    margin-bottom: 35px;
-    color: #cce6ff;
-    font-size: 1.3em;
+      text-align: center;
+      font-weight: 500;
+      margin-bottom: 35px;
+      color: #cce6ff;
+      font-size: 1.3em;
     }
 
-    /* --- ACTION BUTTONS --- */
     .actions {
-    margin-top: 40px;
-    display: flex;
-    gap: 25px;
-    flex-wrap: wrap;
-    justify-content: center;
+      margin-top: 40px;
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .actions a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 600;
-    padding: 14px 30px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #00ffff, #007bff);
-    box-shadow: 0 0 20px rgba(0,255,255,0.4);
-    transition: 0.3s;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 14px 30px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00ffff, #007bff);
+      box-shadow: 0 0 20px rgba(0,255,255,0.4);
+      transition: 0.3s;
     }
 
     .actions a:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 0 35px rgba(0,255,255,0.7);
-    background: linear-gradient(135deg, #007bff, #00ffff);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 35px rgba(0,255,255,0.7);
+      background: linear-gradient(135deg, #007bff, #00ffff);
     }
 
-    /* --- PLANE ANIMATION --- */
     .plane {
-    position: absolute;
-    top: 15%;
-    left: -100px;
-    font-size: 2em;
-    animation: flyAcross 12s linear infinite;
+      position: absolute;
+      top: 15%;
+      left: -100px;
+      font-size: 2em;
+      animation: flyAcross 12s linear infinite;
     }
 
     @keyframes flyAcross {
-    0% { transform: translateX(-200px) translateY(0); opacity: 0; }
-    10% { opacity: 1; }
-    50% { transform: translateX(50vw) translateY(-40px); }
-    100% { transform: translateX(110vw); opacity: 0; }
+      0% { transform: translateX(-200px) translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      50% { transform: translateX(50vw) translateY(-40px); }
+      100% { transform: translateX(110vw); opacity: 0; }
     }
 
-    /* --- FOOTER --- */
     footer {
       position: absolute;
       bottom: 10px;
@@ -156,19 +153,24 @@
 </head>
 <body>
 
-  <!-- Navbar -->
   <div class="navbar">
     <div class="logo">TripLink🌍</div>
     <div class="nav-links">
       <a href="aboutus.php">About Us</a>
       <a href="contact_us.php">Contact Us</a>
+
+      <?php if (isset($_SESSION['username'])): ?>
+        <a href="#">👋 Welcome, <?= htmlspecialchars($_SESSION['username']) ?></a>
+        <a href="logout.php">🚪 Logout</a>
+      <?php else: ?>
+        <a href="login.php">🔐 Login</a>
+        <a href="signup.php">📝 Sign Up</a>
+      <?php endif; ?>
     </div>
   </div>
 
- 
   <div class="plane">✈️</div>
 
-  
   <h1>Find Your Next Adventure 🌍</h1>
   <h2>Flights, Hotels & More — all in one place</h2>
 
